@@ -1,6 +1,6 @@
 TARGET := mpp-wasm
 SOURCES := src/main.cpp
-EMCC_FLAGS := -sFORCE_FILESYSTEM -sNO_EXIT_RUNTIME=1 -s"EXPORTED_RUNTIME_METHODS=['ccall','cwrap']"
+EMCC_FLAGS := -lwebsocket.js -sFORCE_FILESYSTEM -sNO_EXIT_RUNTIME=1 -s"EXPORTED_RUNTIME_METHODS=['ccall','cwrap']"
 
 .PHONY: all
 all:

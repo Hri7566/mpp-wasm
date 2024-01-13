@@ -1,14 +1,8 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <emscripten/emscripten.h>
+#include "main.h"
 
-#ifdef __cplusplus
-#define EXTERN extern "C"
-#else
-#define EXTERN
-#endif
-
-EXTERN EMSCRIPTEN_KEEPALIVE int test()
+FFI bool mpp_load()
 {
-    return 69;
+    sendChat("c++ test");
+
+    return true;
 }
