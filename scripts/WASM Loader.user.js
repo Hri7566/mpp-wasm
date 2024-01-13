@@ -24,10 +24,10 @@ async function loadModule(url) {
   const script = await fetch(url);
 
   eval(await script.text());
-  const test = Module.cwrap("test");
+  const load = Module.cwrap("mpp_load");
 
   Module.onRuntimeInitialized = () => {
-    console.log(test());
+    console.log(load());
   };
 }
 
