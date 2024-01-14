@@ -21,14 +21,29 @@ async function loadModule(url) {
     },
   };
 
-  const script = await fetch(url);
+  const script = await fetch(url, {
+    cache: "no-store",
+  });
 
   eval(await script.text());
+
   const load = Module.cwrap("mpp_load");
+  const a = Module.cwrap("mpp_client_a", undefined, [
+    "string",
+    "string",
+    "string",
+    "string",
+    "number",
+  ]);
 
   Module.onRuntimeInitialized = () => {
-    console.log(load());
+    load();
+
+    MPP.client.on("a", (msg) => {
+      a(msg.p._id, msg.p.name, msg.p.color, msg.a, msg.t);
+    });
   };
 }
 
 globalThis.loadModule = loadModule;
+loadModule("https://home.hri7566.info/mpp-wasm.js");
