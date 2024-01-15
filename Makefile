@@ -2,7 +2,7 @@ TARGET_DIR := bin
 TARGET := mpp-wasm
 
 SOURCES_DIR := src
-SOURCES := $(wildcard $(SOURCES_DIR)/*.cpp) $(wildcard $(SOURCES_DIR)/**/*.cpp)
+SOURCES := $(shell find src -name "*.cpp")
 
 OBJECTS_DIR := bin/obj
 OBJECTS := $(patsubst $(SOURCES_DIR)/%.cpp,$(OBJECTS_DIR)/%.o,$(SOURCES))

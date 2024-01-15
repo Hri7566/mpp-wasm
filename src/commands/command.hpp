@@ -6,10 +6,11 @@
 
 #define CommandCallback std::function<const char *(void)>
 
-class Command
+class BotCommand
 {
 public:
-    Command(CommandCallback callback);
+    BotCommand(const char *id, CommandCallback callback);
+    const char *id;
     CommandCallback callback;
 };
 

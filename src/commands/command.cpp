@@ -1,6 +1,7 @@
 #include "command.hpp"
 
-Command::Command(std::function<const char *(void)> callback)
+BotCommand::BotCommand(const char *id, std::function<const char *(void)> callback)
 {
+    this->id = id;
     this->callback = callback;
 }

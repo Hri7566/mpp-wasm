@@ -3,8 +3,7 @@
 
 #include <string>
 #include "json.hpp"
-
 #include "ffi.h"
-#include "commands/commands.hpp"
+#include "commands/list.hpp"
 
 #endif

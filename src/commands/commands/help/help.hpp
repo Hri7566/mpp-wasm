@@ -4,6 +4,6 @@
 #include "../../../commands/command.hpp"
 
 const char *help_ptr();
-Command help(help_ptr);
+static BotCommand help("help", help_ptr);
 
 #endif
