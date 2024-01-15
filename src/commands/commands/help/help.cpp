@@ -1,6 +1,6 @@
 #include "help.hpp"
 
-const char *help_ptr()
+void help_ptr(char *out)
 {
-    return "test command";
+    strcpy(out, "Commands: help");
 }

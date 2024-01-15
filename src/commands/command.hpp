@@ -4,7 +4,7 @@
 #include <string>
 #include <functional>
 
-#define CommandCallback std::function<const char *(void)>
+#define CommandCallback std::function<void(char *)>
 
 class BotCommand
 {

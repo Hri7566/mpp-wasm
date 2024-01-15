@@ -33,12 +33,17 @@ void substr(const char *str, int pos1, int pos2, char *substring)
 
 FFI void mpp_client_a(const char *_id, const char *name, const char *color, const char *a, int32_t time)
 {
+    int prefixLen = strlen(prefix);
+    char sub_prefix[prefixLen];
+    substr(a, 0, prefixLen, sub_prefix);
+
     if (strncmp(prefix, a, strlen(prefix)) != 0)
         return;
 
-    int firstSpace;
+    int len = strlen(a);
+    int firstSpace = len;
 
-    for (int i = 0; i < strlen(a); i++)
+    for (int i = 0; i < len; i++)
     {
         if (a[i] == ' ')
         {
@@ -49,20 +54,34 @@ FFI void mpp_client_a(const char *_id, const char *name, const char *color, cons
 
     char cmd[firstSpace];
 
+    for (int i = 0; i < firstSpace; i++)
+    {
+        cmd[i] = 0;
+    }
+
     substr(a, 1, firstSpace, cmd);
-    sendChat(cmd);
 
-    // BotCommand *foundCommand;
+    BotCommand *foundCommand;
 
-    // for (int i = 0; i < sizeof(commands) / sizeof(*commands); i++)
-    // {
-    //     BotCommand *command = &(commands[i]);
-    //     command->id;
-    // }
+    for (int i = 0; i < sizeof(commands) / sizeof(*commands); i++)
+    {
+        BotCommand *command = &(commands[i]);
+        if (strcmp(command->id, cmd) == 0)
+        {
+            foundCommand = command;
+            break;
+        }
+    }
 
-    // if (foundCommand == NULL)
-    //     return;
+    if (foundCommand == NULL)
+        return;
 
-    // const char *out = foundCommand->callback();
-    // sendChat(out);
+    char out[512];
+    for (int i = 0; i < 512; i++)
+    {
+        out[i] = 0;
+    }
+
+    foundCommand->callback(out);
+    sendChat(out);
 }
